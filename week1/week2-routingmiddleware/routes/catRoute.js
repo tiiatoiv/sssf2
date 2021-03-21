@@ -1,8 +1,10 @@
 'use strict';
 // catRoute
 
-var express = require('express')
-var router = express.Router()
+const express = require('express');
+const multer = require('multer');
+const upload = multer({dest: './uploads/'});
+const router = express.Router();
 const catController = require('../controllers/catController');
 const { cat_list_get, cat_get, add_cat } = require('../controllers/catController');
 

@@ -1,12 +1,14 @@
 'use strict';
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 3000;
+const cat = require('./routes/catRoute.js');
+const user = require('./routes/catRoute.js');
 
-app.use(express.static('public'));
-
-var  = require('./routes/catRoute.js');
-var = require('./routes/catRoute.js');
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // ...
 
