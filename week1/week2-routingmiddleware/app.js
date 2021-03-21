@@ -3,10 +3,14 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 
-app.get('/cat', (req, res) => {
-  res.send('From this endpoint you can get cats.')
-});
+var  = require('./routes/catRoute.js');
+var = require('./routes/catRoute.js');
+
+// ...
+
+app.use('/cat', cat);
+app.use('/user', user);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
