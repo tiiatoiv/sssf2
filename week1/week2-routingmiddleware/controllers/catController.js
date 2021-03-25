@@ -5,6 +5,12 @@ const catModel = require('../models/catModel');
 
 const cats = catModel.cats;
 
+const cat_list_get_database = async (req, res) => {
+  const cats = await catModel.getAllCats();
+  res.json(cats);
+};
+
+
 const cat_list_get = (req, res) => {
   res.json(cats);
 };
@@ -21,4 +27,5 @@ const add_cat = (req, res) => {
 
 module.exports = {
     cat_list_get,
+    cat_list_get_database,
   };

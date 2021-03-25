@@ -1,9 +1,17 @@
 'use strict';
 const express = require('express');
+const dotenv = require('dotenv').config()
 const cors = require('cors');
 const passport = require('./utils/pass');
 const app = express();
 const port = 3000;
+
+const db = require('db')
+db.connect({
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS
+})
 
 const loggedIn = (req, res, next) => {
     if (req.user) {
