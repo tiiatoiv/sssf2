@@ -28,4 +28,5 @@ const add_cat = (req, res) => {
 module.exports = {
     cat_list_get,
     cat_list_get_database,
+    cat_get,
   };
