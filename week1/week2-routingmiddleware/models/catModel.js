@@ -1,7 +1,9 @@
 'use strict';
 
 const pool = require('../database/db');
-const promisePool = pool.promise();
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
 
 const getAllCats = async () => {
   try {
@@ -47,6 +49,17 @@ const cats = [
   },
 ];
 
+const blogSchema = new Schema({
+  name:  String,
+  age: String,
+  gender:   String,
+  color: String,
+  weight: Number,
+});
+
 module.exports = {
   cats,
 };
+
+module.exports = mongoose.model('Blog', blogSchema);
+
