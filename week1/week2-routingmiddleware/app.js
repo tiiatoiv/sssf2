@@ -1,51 +1,19 @@
 'use strict';
 const express = require('express');
-const dotenv = require('dotenv').config()
-const cors = require('cors');
-const passport = require('./utils/pass');
 const app = express();
+const cors = require('cors');
 const port = 3000;
-
-const db = require('./database/db');
-
-db.on('connected', () => {
-  app.listen(3000);
-});
-
-const loggedIn = (req, res, next) => {
-    if (req.user) {
-        next();
-} else {
-    res.redirect('/form');
-}
-};
-
-const cat = require('./routes/catRoute.js');
-const user = require('./routes/catRoute.js');
-
+const passport = require('./utils/pass');
+const authRoute = require('./routes/authRoute');
+const catRoute = require('./routes/catRoute');
+const userRoute = require('./routes/userRoute');
 app.use(cors());
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use('/auth', authRoute);
+app.use('/cat', passport.authenticate('jwt', {session: false}), catRoute);
+app.use('/user',passport.authenticate('jwt', {session: false}), userRoute);
 
-app.use(passport.initialize());
-app.use(passport.session());
 
-// ...
-
-app.use('/cat', cat);
-app.use('/user', user);
-
-// modify app.post('/login',...
-app.post('/login',
-    passport.authenticate('local', {failureRedirect: '/form'}),
-    (req, res) => {
-      console.log('success');
-      res.redirect('/secret');
-    });
-
-// modify app.get('/secret',...
-app.get('/secret', loggedIn, (req, res) => {
-  res.render('secret');
-});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

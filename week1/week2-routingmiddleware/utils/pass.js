@@ -17,17 +17,16 @@ passport.use(new Strategy(
             console.log('Local strategy', user); // result is binary row
             if (user === undefined) {
                 console.log('user null');
-                return done(null, false, {message: 'Incorrect email.'});
+                return done(null, false, {message: 'Incorrect email'});
             }
             if (user.password !== password) {
-                return done(null, false, {message: 'Incorrect password.'});
+                return done(null, false, {message: 'Incorrect password'});
             }
-            return done(null, {...user}, {message: 'Logged In Successfully'}); // use spread syntax to create shallow copy to get rid of binary row type
+            return done(null, {...user}, {message: 'Logged in'}); // use spread syntax to create shallow copy to get rid of binary row type
         } catch (err) {
             return done(err);
         }
     }));
-
 
 passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
@@ -36,8 +35,5 @@ passport.use(new JWTStrategy({
         return done(null, jwtPayload);
     }
 ));
-
-
-
 
 module.exports = passport;

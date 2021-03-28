@@ -49,7 +49,7 @@ const cats = [
   },
 ];
 
-const blogSchema = new Schema({
+const catSchema = new Schema({
   name:  String,
   age: String,
   gender:   String,
@@ -61,5 +61,5 @@ module.exports = {
   cats,
 };
 
-module.exports = mongoose.model('Blog', blogSchema);
+module.exports = mongoose.model('Cat', catSchema);
 

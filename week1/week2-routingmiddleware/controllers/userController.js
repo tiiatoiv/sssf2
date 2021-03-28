@@ -1,24 +1,26 @@
 'use strict';
-// userController
-
+// catController
 const userModel = require('../models/userModel');
 
 const users = userModel.users;
 
 const user_list_get = (req, res) => {
-  res.json(users);
+    users.forEach((user) => {
+        delete user.password
+    });
+    res.json(users);
 };
+
 
 const user_get = (req, res) => {
-  const gotUser = userModel.users.find(user => user.id === req.params.id);
-  res.json(gotUser);
-};
-
-const add_user = (req, res) => {
-  console.log(req.file);
-  console.log(req.body);
+    const id = req.params.id;
+    const user = users.filter((user) => user.id === id).pop();
+    delete user.password;
+    res.json(user);
 };
 
 module.exports = {
     user_list_get,
-  };
+    user_get,
+
+};

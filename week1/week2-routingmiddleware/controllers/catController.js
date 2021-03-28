@@ -1,32 +1,22 @@
 'use strict';
 // catController
-
 const catModel = require('../models/catModel');
 
 const cats = catModel.cats;
 
-const cat_list_get_database = async (req, res) => {
-  const cats = await catModel.getAllCats();
-  res.json(cats);
-};
-
-
 const cat_list_get = (req, res) => {
-  res.json(cats);
+    res.json(cats);
 };
+
 
 const cat_get = (req, res) => {
-  const gotCat = catModel.cats.find(cat => cat.id === req.params.id);
-  res.json(gotCat);
-};
+    const id = req.params.id;
+    const cat = cats.filter((cat) => cat.id === id).pop();
 
-const add_cat = (req, res) => {
-  console.log(req.file);
-  console.log(req.body);
-};
+    res.json(cat);
+}
 
 module.exports = {
     cat_list_get,
-    cat_list_get_database,
-    cat_get,
-  };
+    cat_get
+};
