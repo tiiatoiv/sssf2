@@ -3,6 +3,7 @@ import {ApolloServer} from 'apollo-server-express';
 import schemas from './schemas/index.js';
 import resolvers from './resolvers/index.js';
 import express from 'express';
+import express from './resolvers/animalResolver.js';
 
 (async () => {
    try {
